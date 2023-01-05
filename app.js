@@ -1,13 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const https = require('https');
 const { response } = require('express');
-const port = 3000;
+const port = process.env.PORT;
 const mailchimp = require("@mailchimp/mailchimp_marketing");
 
 mailchimp.setConfig({
-  apiKey: "f04f4c620f9480b6f7a52401f6a755b0-us21",
-  server: "us21",
+  apiKey: process.env.API_KEY,
+  server: process.env.SERVER,
 });
 
 async function run() {
@@ -76,12 +77,10 @@ app.post('/', (req, res) => {
 });
 
 app.post('/failure', (req, res) => {
-  console.log('papitipu');
   res.redirect('/');
 });
 
 app.post('/success', (req, res) => {
-  console.log('papooota');
   res.redirect('/');
 });
 
